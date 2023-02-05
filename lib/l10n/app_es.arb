@@ -1,3 +1,4 @@
 {
-  "hello_world": "Hola mundo"
+  "user": "usuario",
+  "password": "contraseña"
 }

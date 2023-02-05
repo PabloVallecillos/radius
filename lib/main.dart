@@ -1,79 +1,70 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+import 'constants/constants.dart';
+import 'pages/login.dart';
+
+void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const <Locale>[
-        Locale('en', ''),
-        Locale('es', ''),
-      ],
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
-  final String title;
+  late final ValueNotifier<Brightness> _themeModeNotifier = ValueNotifier<Brightness>(Brightness.light);
+  late final WidgetsBinding _widgetBinding;
+  late final FlutterWindow _window;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void initState() {
+    _widgetBinding = WidgetsBinding.instance;
+    _widgetBinding.addObserver(this);
+    _window = _widgetBinding.window;
+    _themeModeNotifier.value = _window.platformDispatcher.platformBrightness;
+    super.initState();
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void didChangePlatformBrightness() {
+    _themeModeNotifier.value = _window.platformDispatcher.platformBrightness;
+    super.didChangePlatformBrightness();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              AppLocalizations.of(context).hello_world,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+    return ValueListenableBuilder<Brightness>(
+      valueListenable: _themeModeNotifier,
+      builder: (BuildContext context, Brightness value, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: value == Brightness.dark ? darkTheme : lightTheme,
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+          supportedLocales: const <Locale>[
+            Locale('en', ''),
+            Locale('es', ''),
+          ],
+          initialRoute: loginRoute,
+          routes: <String, WidgetBuilder>{
+            loginRoute: (BuildContext context) => const LoginPage(),
+            // homeRoute: (BuildContext context) => HomePage(),
+          },
+        );
+      }
     );
   }
 }
