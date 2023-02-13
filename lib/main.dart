@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constants/constants.dart';
-import 'pages/login.dart';
+import 'pages/pages.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       builder: (BuildContext context, Brightness value, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Radius',
           theme: value == Brightness.dark ? darkTheme : lightTheme,
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
@@ -58,9 +58,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             Locale('en', ''),
             Locale('es', ''),
           ],
-          initialRoute: loginRoute,
+          initialRoute: welcomeRoute,
           routes: <String, WidgetBuilder>{
+            welcomeRoute: (BuildContext context) => const WelcomePage(),
             loginRoute: (BuildContext context) => const LoginPage(),
+            registerRoute: (BuildContext context) => const RegisterPage(),
             // homeRoute: (BuildContext context) => HomePage(),
           },
         );

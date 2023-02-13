@@ -1,4 +1,9 @@
 {
   "user": "usuario",
-  "password": "contraseña"
+  "password": "contraseña",
+  "or": "o",
+  "mail": "email",
+  "login": "iniciar sesion",
+  "register": "registrarse",
+  "welcome_intro": "Bienvenido al futuro de las redes sociales, diviertete con nosotros y tus amigos"
 }

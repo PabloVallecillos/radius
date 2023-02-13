@@ -1,4 +1,9 @@
 {
   "user": "user",
-  "password": "password"
+  "password": "password",
+  "or": "or",
+  "mail": "Email",
+  "login": "login",
+  "register": "register",
+  "welcome_intro": "Welcome to the future of social networks, have fun with us and your friends."
 }
