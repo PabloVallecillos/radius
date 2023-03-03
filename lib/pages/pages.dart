@@ -1,4 +1,4 @@
-export 'login.dart';
-export 'register.dart';
-export 'welcome.dart';
+export 'unauth/login.dart';
+export 'unauth/register.dart';
+export 'unauth/welcome.dart';
 

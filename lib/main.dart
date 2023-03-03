@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:radius/pages/auth/dashboard.dart';
 
 import 'constants/constants.dart';
 import 'pages/pages.dart';
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Radius',
-          theme: value == Brightness.dark ? darkTheme : lightTheme,
+          theme: darkTheme,
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -63,7 +64,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             welcomeRoute: (BuildContext context) => const WelcomePage(),
             loginRoute: (BuildContext context) => const LoginPage(),
             registerRoute: (BuildContext context) => const RegisterPage(),
-            // homeRoute: (BuildContext context) => HomePage(),
+            dashboardRoute: (BuildContext context) => const DashboardPage(),
           },
         );
       }

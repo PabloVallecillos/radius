@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
-import '../../constants/constants.dart';
+import '../../../constants/constants.dart';
 
-class SScaffold extends StatelessWidget {
+class UnAuthScaffold extends StatelessWidget {
   final Widget body;
   final bool resizeToAvoidBottomInset;
 
-  const SScaffold(
+  const UnAuthScaffold(
     {
       super.key,
       required this.body,
@@ -25,7 +25,7 @@ class SScaffold extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: const RiveAnimation.asset(
-              background,
+              backgroundRiv,
               fit: BoxFit.cover,
             ),
           ),
@@ -37,9 +37,22 @@ class SScaffold extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: body
+          Center(
+            child: Padding(
+              padding: defaultPadding,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: OrientationBuilder(
+                  builder: (BuildContext context, Orientation orientation)
+                    => orientation == Orientation.landscape
+                        ? SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: body,
+                        )
+                        : body,
+                )
+              )
+            ),
           ),
         ],
       ),
