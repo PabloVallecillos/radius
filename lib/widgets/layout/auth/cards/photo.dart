@@ -9,6 +9,7 @@ class PhotoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool darkMode = Theme.of(context).brightness == Brightness.dark;
     return Stack(
       children: [
         Center(
@@ -18,11 +19,11 @@ class PhotoCard extends StatelessWidget {
               width: MediaQuery.of(context).size.width - 65,
               height: 547.5,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  border: Border.all(
-                      color: Colors.white
-                  ),
-                  color: Colors.white.withOpacity(.05)
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                border: Border.all(
+                  color: darkMode ? Colors.white : Colors.black
+                ),
+                color: darkMode ? Colors.white.withOpacity(.05) : Colors.black.withOpacity(.05)
               ),
               child: Column(
                 children: [
@@ -42,7 +43,7 @@ class PhotoCard extends StatelessWidget {
                             offset: Offset(8,0),
                             child: Row(
                               children: [
-                                SvgPicture.asset(loveSvg, color: Colors.white),
+                                SvgPicture.asset(loveSvg, color: darkMode ? Colors.white : Colors.black),
                                 Icon(Icons.more_vert_outlined),
                               ],
                             ),

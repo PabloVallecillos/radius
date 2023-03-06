@@ -39,7 +39,7 @@ class _DashboardPageState extends State<DashboardPage> with TickerProviderStateM
       length: 5,
       initialIndex: 2,
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: darkMode ? Colors.black : Colors.white,
         bottomNavigationBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Padding(
@@ -62,7 +62,7 @@ class _DashboardPageState extends State<DashboardPage> with TickerProviderStateM
                   child: Row(
                     children: [
                       TabBar(
-                        indicator: CircleTabIndicator(color: Colors.white, radius: 8),
+                        indicator: CircleTabIndicator(color: darkMode ? Colors.white : Colors.black, radius: 8),
                         indicatorPadding: EdgeInsets.zero,
                         labelPadding: EdgeInsets.symmetric(horizontal: 5),
                         isScrollable: true,
@@ -72,7 +72,7 @@ class _DashboardPageState extends State<DashboardPage> with TickerProviderStateM
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(20)),
-                              border: Border.all(color: Colors.white)
+                              border: Border.all(color: darkMode ? Colors.white : Colors.black)
                             ),
                             width: 12,
                             height: 12,
@@ -88,8 +88,8 @@ class _DashboardPageState extends State<DashboardPage> with TickerProviderStateM
                     backgroundColor: Colors.transparent,
                     mini: true,
                     shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Colors.white
+                      side: BorderSide(
+                        color: darkMode ? Colors.white : Colors.black
                       ),
                       borderRadius: BorderRadius.circular(100)
                     ),
